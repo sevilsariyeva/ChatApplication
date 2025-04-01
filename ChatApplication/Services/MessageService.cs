@@ -44,9 +44,23 @@ namespace ChatApplication.Services
 
         }
 
-        public Task<IEnumerable<MessageUsersListViewModel>> GetUsers()
+        public async Task<IEnumerable<MessageUsersListViewModel>> GetUsers()
         {
-            throw new NotImplementedException();
+            var currentUserId = _currentUserService.UserId;
+            var users = await _context.Users
+                .Where(i => i.Id != currentUserId)
+                .Select(i => new MessageUsersListViewModel
+                {
+                    Id = i.Id,
+                    Username = i.UserName,
+                    LastMessage = _context.Messages.Where(m => (m.SenderId == currentUserId || m.SenderId == i.Id)&& (m.ReceiverId == currentUserId || m.ReceiverId == i.Id))
+                        .OrderByDescending(m => m.Id)
+                        .Select(m => m.Text)
+                        .FirstOrDefault()
+                })
+                .ToListAsync();
+
+            return users;
         }
     }
 }
