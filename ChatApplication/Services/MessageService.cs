@@ -30,7 +30,10 @@ namespace ChatApplication.Services
                 ReceiverId = selectedUserId,
                 ReceiverUserName = selectedUserName
             };
-            var messages = await _context.Messages.Where(i => (i.SenderId == currentUserId || i.SenderId == selectedUserId) && (i.ReceiverId == currentUserId)).Select(i => new UserMessagesListViewModel()
+            var messages = await _context.Messages.Where(i =>
+                (i.SenderId == currentUserId && i.ReceiverId == selectedUserId) ||
+                (i.SenderId == selectedUserId && i.ReceiverId == currentUserId))
+            .Select(i => new UserMessagesListViewModel()
             { 
                 Id = i.Id,
                 Text = i.Text,
