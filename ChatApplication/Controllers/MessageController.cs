@@ -15,9 +15,9 @@ namespace ChatApplication.Controllers
             var users=await _messageService.GetUsers();
             return View(users);
         }
-        public async Task<IActionResult>Chat(string selecteedUserId)
+        public async Task<IActionResult>Chat(string selectedUserId)
         {
-            var chatViewModel=await _messageService.GetMessages(selecteedUserId);
+            var chatViewModel=await _messageService.GetMessages(selectedUserId);
             return View(chatViewModel);
         }
     }

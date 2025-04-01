@@ -41,13 +41,16 @@
 
 	.sent-message {
 		background-color: darkblue;
-		align-self: start;
+		align-self: end; 
+		text-align: right;
 	}
 
 	.received-message {
-		align-self: end;
 		background-color: darkred;
+		align-self: start; 
+		text-align: left;
 	}
+
 
 	.send-message-box {
 		display: flex;
@@ -119,30 +122,30 @@
 				var receiverId="@Model.ReceiverId";
 				var message=$(".message-field").val();
 
-				connection.invoke("SendMessage",receiverId,message;
+				connection.invoke("SendMessage",receiverId,message);
 				$(".message-field").val("").focus();
 			});
-			connection.on("ReceiveMessage",function(message,date,time,senderId){
-				var message=``;
-				if(senderId=="@Model.CurrentUserId"){
-					message=`
-								<div class="message sent-message">
-									<p>${message}</p>
-									<span>${time}</span>
-								</div>
-								`;
-				}
-				else{
-					message=`
-								<div class="message received-message">
-									<p>${message}</p>
-									<span>${time}</span>
-								</div>
-								`;
-				}
-				$(".messages-box").append(message);
-				$(".messages-box").scrollTop($(".messages")[0].scrollHeight);
+					connection.on("ReceiveMessage", function(msgText, date, time, senderId) {
+			var messageHtml = ``;
+			if (senderId == "@Model.CurrentUserId") {
+				messageHtml = `
+					<div class="message sent-message">
+						<p>${msgText}</p>
+						<span>${time}</span>
+					</div>
+				`;
+			} else {
+				messageHtml = `
+					<div class="message received-message">
+						<p>${msgText}</p>
+						<span>${time}</span>
+					</div>
+				`;
+			}
+			$(".messages-box").append(messageHtml);
+			$(".messages-box").scrollTop($(".messages-box")[0].scrollHeight);
 		});
+
 
 		$(function(){
 			$(".messages-box").scrollTop($(".messages")[0].scrollHeight);

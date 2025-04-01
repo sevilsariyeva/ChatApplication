@@ -3,35 +3,44 @@
 
 <style>
 
-	.users{
-		display:flex;
-		flex-direction:column;
-		align-items:center;
+	.users {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
-	.users{
-		border:1px solid #e6e6e6;
-		padding:15px;
-		width:47%;
-		margin-bottom:10px;
+
+	.users {
+		border: 1px solid #e6e6e6;
+		padding: 15px;
+		width: 47%;
+		margin-bottom: 10px;
 	}
-	.first-letter{
-		width:100px;
-		height:100px;
-		background-color:darkblue;
-		border-radius:50%;
-		text-align:center;
-		font-size:60px;
-		color:white;
+
+	.first-letter {
+		width: 100px;
+		height: 100px;
+		background-color: darkblue;
+		border-radius: 50%;
+		text-align: center;
+		font-size: 60px;
+		color: white;
+		line-height: 100px;
 	}
-	.user-info-wrap{
-		align-content:center;
+
+	.user-info-wrap {
+		align-content: center;
 	}
-	.user-info{
-		text-align:center;
+
+	.user-info {
+		text-align: center;
 	}
-	.chat-btn-wrap{
-		align-content:center;
+
+	.chat-btn-wrap {
+		align-content: center;
+		text-align: right;
 	}
+
+
 </style>
 
 
@@ -53,8 +62,8 @@
 					</div>
 				</div>
 
-				<div class="col-lg-2 chat-btn-wrap">
-					<a class="chat-btn btn btn-secondary" href="/Messages/Chat?selectedUserId=@item.Id"></a>
+				<div class="col-lg-3 chat-btn-wrap">
+					<a class="chat-btn btn btn-secondary" href="/Message/Chat?selectedUserId=@item.Id">Chat</a>
 				</div>
 			</div>
 		</div>
